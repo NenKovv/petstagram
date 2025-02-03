@@ -1,5 +1,6 @@
-from petstagram.core.utils import megabytes_to_bytes
 from django.core.exceptions import ValidationError
+
+from petstagram.core.utils import megabytes_to_bytes
 
 
 def validate_file_less_than_5mb(fileobj):

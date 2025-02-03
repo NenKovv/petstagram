@@ -5,17 +5,6 @@ from django.template.defaultfilters import slugify
 
 from petstagram.core.model_mixins import StrFromFieldsMixin
 
-# Create your models here.
-
-'''
-The fields Name and Pet Photo are required:
-•	Name - it should consist of a maximum of 30 characters.
-•	Personal Pet Photo - the user can link a picture using a URL
-The field date of birth is optional:
-•	Date of Birth - pet's day, month, and year of birth
-
-'''
-
 
 
 class Pet(StrFromFieldsMixin, models.Model):
@@ -45,9 +34,13 @@ class Pet(StrFromFieldsMixin, models.Model):
     )
 
     def save(self, *args, **kwargs):
+        # Create/Update
         super().save(*args, **kwargs)
+
         if not self.slug:
             self.slug = slugify(f'{self.id}-{self.name}')
+
+        # Update
         return super().save(*args, **kwargs)
 
     # Without 'if'  the slug would be changed
